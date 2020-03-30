@@ -4,17 +4,22 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.ndhb.pycare.registration.aggregate.RegistrationType;
 import org.ndhb.pycare.registration.aggregate.StatusType;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.opencsv.bean.CsvBindByName;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.UUID;
 
@@ -27,11 +32,8 @@ public class Account {
     private UUID id;
     private String patientLocalId;
 	private String uhid;
-	@Size(min = 10, max = 200, message 
-		      = "Paient name must be between 10 and 200 characters")
 	private String patientName;
-	private Date dob;
-	//private int patientAge;
+	private LocalDate dob;
 	private StatusType status;
 	private RegistrationType registrationType;
 	private String email;
@@ -40,10 +42,14 @@ public class Account {
 	private int gravida;
 	private int identityUnknownIndicator;
 	private int causeOfDeathKnownIndicator;
-	@Size(max = 1, message 
-		      = "Paient adressType must be 1 character long")
+	
 	private String patientAddressType;
-	private String patientAddress;
+	 private String houseNo;
+	 private String locality;
+	 private String subLocality1;
+	 private String subLocality2;
+	 private String state;
+	 private String pin;
 	private String patientLandlineNumber;
 	private String patientMobileNumber;
 	private int patientClass;
@@ -53,7 +59,8 @@ public class Account {
 	private String insuredPolicyID;
 	private int secondaryHealthInsurancePolicyIndicator;
 	private String secondaryHealthInsurancePolicyID;
-
+	//@Embedded
+    //Address address;
 
 
 }

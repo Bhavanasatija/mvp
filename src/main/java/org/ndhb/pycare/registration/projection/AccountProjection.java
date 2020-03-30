@@ -48,7 +48,13 @@ public class AccountProjection {
         		event.getIdentityUnknownIndicator(),
         		event.getCauseOfDeathKnownIndicator(),
         		event.getPatientAddressType(),
-        		event.getPatientAddress(),
+        		//event.getPatientAddress(),
+        		event.getHouseNo(),
+        		event.getLocality(),
+        		event.getSubLocality1(),
+        		event.getSubLocality2(),
+        		event.getState(),
+        		event.getPin(),
         		event.getPatientLandlineNumber(),
         		event.getPatientMobileNumber(),
         		event.getPatientClass(),
@@ -82,7 +88,13 @@ public class AccountProjection {
             account.setCauseOfDeathKnownIndicator(event.getCauseOfDeathKnownIndicator());
             account.setBirthOrder(event.getBirthOrder());
             account.setDurationOfPregnancy(event.getDurationOfPregnancy());
-            account.setPatientAddress(event.getPatientAddress());
+            //account.setPatientAddress(event.getPatientAddress());
+            account.setHouseNo( event.getHouseNo());
+            account.setLocality(event.getLocality());
+            account.setSubLocality1(event.getSubLocality1());
+            account.setSubLocality2(event.getSubLocality2());
+            account.setState(event.getState());
+            account.setPin(event.getPin());
             account.setPatientAddressType(event.getPatientAddressType());
             account.setPatientLandlineNumber(event.getPatientLandlineNumber());
             account.setPatientMobileNumber(event.getPatientMobileNumber());

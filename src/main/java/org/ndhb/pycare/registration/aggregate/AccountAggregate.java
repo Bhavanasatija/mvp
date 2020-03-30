@@ -1,5 +1,6 @@
 package org.ndhb.pycare.registration.aggregate;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.UUID;
 import java.util.regex.Pattern;
@@ -41,7 +42,7 @@ public class AccountAggregate {
     private String patientLocalId;
     private String email;
     private String uhid;
-    private Date dob;
+	private LocalDate dob;
     private String patientName;
   //  private int patientAge;
     private int birthOrder;
@@ -49,7 +50,13 @@ public class AccountAggregate {
     private int gravida;
     private int identityUnknownIndicator;
     private int causeOfDeathKnownIndicator;
-    private String patientAddress;
+  //  private String patientAddress;
+    private String houseNo;
+	 private String locality;
+	 private String subLocality1;
+	 private String subLocality2;
+	 private String state;
+	 private String pin;
     private String patientAddressType;
     private String patientLandlineNumber;
     private String patientMobileNumber;
@@ -63,18 +70,20 @@ public class AccountAggregate {
     private String payorAssignedBeneficiaryID;
     private StatusType status;
     private RegistrationType registrationType;
+    //private Address address;
     
     
 
     @CommandHandler
     public AccountAggregate(CreateAccountCommand command) {
     	
-    if(command.getPatientName().trim().length()< 3 || command.getPatientName().trim().length() > 30) {
-        throw new IllegalArgumentException("Patient Name must be between 3 to 30 charechter length");
-    }
-    if(command.getPatientAddressType().trim().length() > 1) {
-        throw new IllegalArgumentException("Patient AddressType charechter size must be 1");
-    }
+		/*
+		 * if(command.getPatientName().trim().length()< 3 ||
+		 * command.getPatientName().trim().length() > 30) { throw new
+		 * IllegalArgumentException("Patient Name must be between 3 to 30 charechter length"
+		 * ); } if(command.getPatientAddressType().trim().length() > 1) { throw new
+		 * IllegalArgumentException("Patient AddressType charechter size must be 1"); }
+		 */
    
 	
     	AggregateLifecycle.apply(
@@ -94,7 +103,13 @@ public class AccountAggregate {
                         command.getIdentityUnknownIndicator(),
                         command.getCauseOfDeathKnownIndicator(),
                         command.getPatientAddressType(),
-                        command.getPatientAddress(),
+                     //   command.getPatientAddress(),
+                        command.getHouseNo(),
+                        command.getLocality(),
+                        command.getSubLocality1(),
+                        command.getSubLocality2(),
+                        command.getState(),
+                        command.getPin(),
                         command.getPatientLandlineNumber(),
                         command.getPatientMobileNumber(),
                         command.getPatientClass(),
@@ -130,7 +145,13 @@ public class AccountAggregate {
         this.pregnancyIndicator = event.getPregnancyIndicator();
         this.gravida =event.getGravida();
         this.parity = event.getParity();
-        this.patientAddress = event.getPatientAddress();
+     //   this.patientAddress = event.getPatientAddress();
+        this.houseNo = event.getHouseNo();
+        this.locality =event.getLocality();
+        this.subLocality1 = event.getSubLocality1();
+        this.subLocality2 = event.getSubLocality2();
+        this.state = event.getState();
+        this.pin = event.getPin();
         this.patientAddressType =event.getPatientAddressType();
         this.insuredCardID = event.getPatientMobileNumber();
         this.patientMobileNumber = event.getPatientMobileNumber();
@@ -163,7 +184,13 @@ public class AccountAggregate {
                            command.getIdentityUnknownIndicator(),
                            command.getCauseOfDeathKnownIndicator(),
                            command.getPatientAddressType(),
-                           command.getPatientAddress(),
+                          // command.getPatientAddress(),
+                           command.getHouseNo(),
+                           command.getLocality(),
+                           command.getSubLocality1(),
+                           command.getSubLocality2(),
+                           command.getState(),
+                           command.getPin(),
                            command.getPatientLandlineNumber(),
                            command.getPatientMobileNumber(),
                            command.getPatientClass(),

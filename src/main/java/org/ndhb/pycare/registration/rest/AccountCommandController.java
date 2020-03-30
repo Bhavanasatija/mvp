@@ -9,6 +9,7 @@ import javax.validation.Valid;
 import org.ndhb.pycare.registration.aggregate.RegistrationType;
 import org.ndhb.pycare.registration.entity.Account;
 import org.ndhb.pycare.registration.rest.dto.AccountCreationDTO;
+import org.ndhb.pycare.registration.rest.dto.AccountUpdateDTO;
 import org.ndhb.pycare.registration.rest.dto.RegistrationTypeDTO;
 import org.ndhb.pycare.registration.rest.dto.StatusDTO;
 import org.ndhb.pycare.registration.service.AccountCommandService;
@@ -36,7 +37,7 @@ public class AccountCommandController {
     }
     
     @PutMapping(value = "/{accountId}")
-    public CompletableFuture<Account> updateAccount(@PathVariable(value = "accountId") String accountId,@RequestBody AccountCreationDTO updateDTO) {
+    public CompletableFuture<Account> updateAccount( @PathVariable(value = "accountId") String accountId,@Valid @RequestBody AccountUpdateDTO updateDTO) {
         return this.accountCommandService.updateAccount(accountId, updateDTO);
     }
 

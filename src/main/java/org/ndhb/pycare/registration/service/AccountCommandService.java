@@ -15,6 +15,7 @@ import org.ndhb.pycare.registration.command.UpdateRegistrationTypeCommand;
 import org.ndhb.pycare.registration.command.UpdateStatusCommand;
 import org.ndhb.pycare.registration.entity.Account;
 import org.ndhb.pycare.registration.rest.dto.AccountCreationDTO;
+import org.ndhb.pycare.registration.rest.dto.AccountUpdateDTO;
 import org.ndhb.pycare.registration.rest.dto.PatientLocalIdDTO;
 import org.ndhb.pycare.registration.rest.dto.RegistrationTypeDTO;
 import org.ndhb.pycare.registration.rest.dto.StatusDTO;
@@ -49,7 +50,13 @@ public class AccountCommandService {
 						creationDTO.getIdentityUnknownIndicator(),
 						creationDTO.getCauseOfDeathKnownIndicator(),
 						creationDTO.getPatientAddressType(),
-						creationDTO.getPatientAddress(),
+						//creationDTO.getPatientAddress(),
+						creationDTO.getHouseNo(),
+						creationDTO.getLocality(),
+						creationDTO.getSubLocality1(),
+						creationDTO.getSubLocality2(),
+						creationDTO.getState(),
+						creationDTO.getPin(),
 						creationDTO.getPatientLandlineNumber(),
 		        		creationDTO.getPatientMobileNumber(),
 		        		creationDTO.getPatientClass(),
@@ -65,31 +72,37 @@ public class AccountCommandService {
 				));
 	}
 
-	public CompletableFuture<Account> updateAccount(String accountId, AccountCreationDTO creationDTO) {
+	public CompletableFuture<Account> updateAccount(String accountId, AccountUpdateDTO updateDTO) {
 		return this.commandGateway.send(new UpdateAccountCommand(
 				formatUuid(accountId),
-				creationDTO.getUhid(),
-				creationDTO.getPatientName(),
-				creationDTO.getStatus(),
-				creationDTO.getRegistrationType(),
-				creationDTO.getEmail(),
-				creationDTO.getDob(),
-				creationDTO.getBirthOrder(),
-				creationDTO.getParity(),
-				creationDTO.getGravida(),
-				creationDTO.getIdentityUnknownIndicator(),
-				creationDTO.getCauseOfDeathKnownIndicator(),
-				creationDTO.getPatientAddressType(),
-				creationDTO.getPatientAddress(),
-				creationDTO.getPatientLandlineNumber(),
-        		creationDTO.getPatientMobileNumber(),
-        		creationDTO.getPatientClass(),
-        		creationDTO.getPregnancyIndicator(),
-        		creationDTO.getDurationOfPregnancy(),
-        		creationDTO.getInsuredCardID(),
-        		creationDTO.getInsuredPolicyID(),
-        		creationDTO.getSecondaryHealthInsurancePolicyID(),
-        		creationDTO.getSecondaryHealthInsurancePolicyIndicator()
+				updateDTO.getUhid(),
+				updateDTO.getPatientName(),
+				updateDTO.getStatus(),
+				updateDTO.getRegistrationType(),
+				updateDTO.getEmail(),
+				updateDTO.getDob(),
+				updateDTO.getBirthOrder(),
+				updateDTO.getParity(),
+				updateDTO.getGravida(),
+				updateDTO.getIdentityUnknownIndicator(),
+				updateDTO.getCauseOfDeathKnownIndicator(),
+				updateDTO.getPatientAddressType(),
+				//creationDTO.getPatientAddress(),
+				updateDTO.getHouseNo(),
+				updateDTO.getLocality(),
+				updateDTO.getSubLocality1(),
+				updateDTO.getSubLocality2(),
+				updateDTO.getState(),
+				updateDTO.getPin(),
+				updateDTO.getPatientLandlineNumber(),
+				updateDTO.getPatientMobileNumber(),
+				updateDTO.getPatientClass(),
+        		updateDTO.getPregnancyIndicator(),
+        		updateDTO.getDurationOfPregnancy(),
+        		updateDTO.getInsuredCardID(),
+        		updateDTO.getInsuredPolicyID(),
+        		updateDTO.getSecondaryHealthInsurancePolicyID(),
+        		updateDTO.getSecondaryHealthInsurancePolicyIndicator()
 
 		));
 	}

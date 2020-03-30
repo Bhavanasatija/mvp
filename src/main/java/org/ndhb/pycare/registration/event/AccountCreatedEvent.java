@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.UUID;
 
@@ -18,7 +19,7 @@ public class AccountCreatedEvent {
 
 	private String uhid;
 	private String patientName;
-	private Date dob;
+	private LocalDate dob;
 	//private int patientAge;
 	private StatusType status;
 	private RegistrationType registrationType;
@@ -29,7 +30,13 @@ public class AccountCreatedEvent {
 	private int identityUnknownIndicator;
 	private int causeOfDeathKnownIndicator;
 	private String patientAddressType;
-	private String patientAddress;
+	//private String patientAddress;
+	 private String houseNo;
+	 private String locality;
+	 private String subLocality1;
+	 private String subLocality2;
+	 private String state;
+	 private String pin;
 	private String patientLandlineNumber;
 	private String patientMobileNumber;
 	private int patientClass;
