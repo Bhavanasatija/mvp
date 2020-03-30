@@ -18,6 +18,8 @@ public class UpdateAccountCommand {
 
 	@TargetAggregateIdentifier
     private UUID accountId;
+	 private String alternateUniqueIdentificationNumberType;
+	    private String alternateUniqueIdentificationNumber;
 	private String uhid;
 	private String patientName;
 	//private int patientAge;

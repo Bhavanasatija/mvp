@@ -13,7 +13,10 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class AccountUpdatedEvent {
+	
 	private UUID accountId;
+	 private String alternateUniqueIdentificationNumberType;
+	    private String alternateUniqueIdentificationNumber;
 	private String uhid;
 	private String patientName;
 	private LocalDate dob;

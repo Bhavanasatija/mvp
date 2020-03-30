@@ -30,6 +30,8 @@ import java.util.UUID;
 public class Account {
     @Id
     private UUID id;
+    private String alternateUniqueIdentificationNumberType;
+    private String alternateUniqueIdentificationNumber;
     private String patientLocalId;
 	private String uhid;
 	private String patientName;

@@ -20,6 +20,8 @@ public class CreateAccountCommand {
 
 	@TargetAggregateIdentifier
 	private UUID accountId;
+	private String alternateUniqueIdentificationNumberType;
+	private String alternateUniqueIdentificationNumber;
 	private String patientLocalId;
 	private String uhid;
 	private String patientName;

@@ -34,6 +34,8 @@ public class AccountProjection {
         log.debug("Handling an Account creation command {}", event.getAccountId());
         Account account = new Account(
         		event.getAccountId(),
+        		event.getAlternateUniqueIdentificationNumberType(),
+        		event.getAlternateUniqueIdentificationNumber(),
         		event.getPatientLocalId(),
         		event.getUhid(),
         		event.getPatientName(),
@@ -79,6 +81,8 @@ public class AccountProjection {
         Optional<Account> optionalAccount = this.repository.findById(event.getAccountId());
         if (optionalAccount.isPresent()) {
             Account account = optionalAccount.get();
+            account.setAlternateUniqueIdentificationNumber(event.getAlternateUniqueIdentificationNumber());
+            account.setAlternateUniqueIdentificationNumberType(event.getAlternateUniqueIdentificationNumberType());
             account.setPatientName(event.getPatientName());
             account.setRegistrationType(event.getRegistrationType());
             account.setDob(event.getDob());

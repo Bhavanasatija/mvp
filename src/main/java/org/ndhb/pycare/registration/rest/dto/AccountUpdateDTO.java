@@ -21,6 +21,10 @@ import lombok.Value;
 public class AccountUpdateDTO {
 	@Size(max = 50, message = "Paient uhid must be max 50 characters")
 	private String uhid;
+	@Size(max = 1, message = "Paient AUID Type must be max 1 characters")
+	 private String alternateUniqueIdentificationNumberType;
+		@Size(max = 50, message = "Paient AUID No must be max 50 characters")
+       private String alternateUniqueIdentificationNumber;
 	@Size(min = 3, max = 30, message = "Paient name must be between 3 and 200 characters")
 	private String patientName;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")

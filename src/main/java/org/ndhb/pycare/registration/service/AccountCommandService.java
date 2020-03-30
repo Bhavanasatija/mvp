@@ -14,11 +14,18 @@ import org.ndhb.pycare.registration.command.UpdatePatientLocalIdCommand;
 import org.ndhb.pycare.registration.command.UpdateRegistrationTypeCommand;
 import org.ndhb.pycare.registration.command.UpdateStatusCommand;
 import org.ndhb.pycare.registration.entity.Account;
+import org.ndhb.pycare.registration.exception.DuplicateDataException;
+import org.ndhb.pycare.registration.exception.ResponseError;
+import org.ndhb.pycare.registration.repository.AccountRepository;
 import org.ndhb.pycare.registration.rest.dto.AccountCreationDTO;
 import org.ndhb.pycare.registration.rest.dto.AccountUpdateDTO;
 import org.ndhb.pycare.registration.rest.dto.PatientLocalIdDTO;
 import org.ndhb.pycare.registration.rest.dto.RegistrationTypeDTO;
 import org.ndhb.pycare.registration.rest.dto.StatusDTO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.data.domain.ExampleMatcher.GenericPropertyMatchers;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import lombok.AllArgsConstructor;
@@ -26,10 +33,20 @@ import lombok.AllArgsConstructor;
 @Service
 @AllArgsConstructor
 public class AccountCommandService {
+	@Autowired
+	private AccountRepository accountRepository;
+
 	private final CommandGateway commandGateway;
 	private static AtomicInteger atomicInteger = new AtomicInteger(200);
 
 	public CompletableFuture<Account> createAccount(AccountCreationDTO creationDTO) {
+		
+		
+		if(accountRepository.existsByEmail(creationDTO.getEmail())) throw new IllegalArgumentException(" User Already Exist with same email id");
+		
+		
+			
+	
 		String prefix = "TEMP";
 		if (creationDTO.getRegistrationType() == (RegistrationType.WALKIN))
 			prefix = "RTWO-";
@@ -39,6 +56,8 @@ public class AccountCommandService {
 						UUID.randomUUID(), 
 						prefix + atomicInteger.incrementAndGet(),
 						creationDTO.getUhid(),
+						creationDTO.getAlternateUniqueIdentificationNumberType(),
+						creationDTO.getAlternateUniqueIdentificationNumber(),
 						creationDTO.getPatientName(),
 						creationDTO.getStatus(),
 						creationDTO.getRegistrationType(),
@@ -76,6 +95,8 @@ public class AccountCommandService {
 		return this.commandGateway.send(new UpdateAccountCommand(
 				formatUuid(accountId),
 				updateDTO.getUhid(),
+				updateDTO.getAlternateUniqueIdentificationNumberType(),
+				updateDTO.getAlternateUniqueIdentificationNumber(),
 				updateDTO.getPatientName(),
 				updateDTO.getStatus(),
 				updateDTO.getRegistrationType(),

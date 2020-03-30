@@ -18,6 +18,8 @@ public class AccountCreatedEvent {
     private String patientLocalId;
 
 	private String uhid;
+	 private String alternateUniqueIdentificationNumberType;
+	    private String alternateUniqueIdentificationNumber;
 	private String patientName;
 	private LocalDate dob;
 	//private int patientAge;
