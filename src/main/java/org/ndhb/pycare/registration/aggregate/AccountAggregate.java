@@ -72,7 +72,9 @@ public class AccountAggregate {
     if(command.getPatientName().trim().length()< 3 || command.getPatientName().trim().length() > 30) {
         throw new IllegalArgumentException("Patient Name must be between 3 to 30 charechter length");
     }
-	
+    if(command.getPatientAddressType().trim().length() > 1) {
+        throw new IllegalArgumentException("Patient AddressType charechter size must be 1");
+    }
    
 	
     	AggregateLifecycle.apply(
