@@ -40,6 +40,8 @@ public class Account {
 	private int gravida;
 	private int identityUnknownIndicator;
 	private int causeOfDeathKnownIndicator;
+	@Size(max = 1, message 
+		      = "Paient adressType must be 1 character long")
 	private String patientAddressType;
 	private String patientAddress;
 	private String patientLandlineNumber;
