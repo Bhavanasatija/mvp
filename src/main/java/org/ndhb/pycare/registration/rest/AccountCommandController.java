@@ -4,6 +4,8 @@ import static org.springframework.http.HttpStatus.CREATED;
 
 import java.util.concurrent.CompletableFuture;
 
+import javax.validation.Valid;
+
 import org.ndhb.pycare.registration.aggregate.RegistrationType;
 import org.ndhb.pycare.registration.entity.Account;
 import org.ndhb.pycare.registration.rest.dto.AccountCreationDTO;
@@ -28,7 +30,7 @@ public class AccountCommandController {
 
     @PostMapping
     @ResponseStatus(value = CREATED)
-    public CompletableFuture<Account> createAccount(@RequestBody AccountCreationDTO creationDTO) {
+    public CompletableFuture<Account> createAccount(@Valid @RequestBody AccountCreationDTO creationDTO) {
     	
         return this.accountCommandService.createAccount(creationDTO);
     }

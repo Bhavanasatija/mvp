@@ -33,17 +33,63 @@ public class AccountCommandService {
 		if (creationDTO.getRegistrationType() == (RegistrationType.WALKIN))
 			prefix = "RTWO-";
 		return this.commandGateway
-				.send(new CreateAccountCommand(UUID.randomUUID(), prefix + atomicInteger.incrementAndGet(),
-						creationDTO.getUhid(), creationDTO.getName(), creationDTO.getEmail(), creationDTO.getDob(),
-						creationDTO.getAge(), creationDTO.getStatus(), creationDTO.getRegistrationType()
+				.send(new CreateAccountCommand(
+						
+						UUID.randomUUID(), 
+						prefix + atomicInteger.incrementAndGet(),
+						creationDTO.getUhid(),
+						creationDTO.getPatientName(),
+						creationDTO.getStatus(),
+						creationDTO.getRegistrationType(),
+						creationDTO.getEmail(),
+						creationDTO.getDob(),
+						creationDTO.getBirthOrder(),
+						creationDTO.getParity(),
+						creationDTO.getGravida(),
+						creationDTO.getIdentityUnknownIndicator(),
+						creationDTO.getCauseOfDeathKnownIndicator(),
+						creationDTO.getPatientAddressType(),
+						creationDTO.getPatientAddress(),
+						creationDTO.getPatientLandlineNumber(),
+		        		creationDTO.getPatientMobileNumber(),
+		        		creationDTO.getPatientClass(),
+		        		creationDTO.getPregnancyIndicator(),
+		        		creationDTO.getDurationOfPregnancy(),
+		        		creationDTO.getInsuredCardID(),
+		        		creationDTO.getInsuredPolicyID(),
+		        		creationDTO.getSecondaryHealthInsurancePolicyID(),
+		        		creationDTO.getSecondaryHealthInsurancePolicyIndicator()
+
+		     
 
 				));
 	}
 
 	public CompletableFuture<Account> updateAccount(String accountId, AccountCreationDTO creationDTO) {
-		return this.commandGateway.send(new UpdateAccountCommand(formatUuid(accountId), creationDTO.getUhid(),
-				creationDTO.getName(), creationDTO.getEmail(), creationDTO.getDob(), creationDTO.getAge(),
-				creationDTO.getStatus(), creationDTO.getRegistrationType()
+		return this.commandGateway.send(new UpdateAccountCommand(
+				formatUuid(accountId),
+				creationDTO.getUhid(),
+				creationDTO.getPatientName(),
+				creationDTO.getStatus(),
+				creationDTO.getRegistrationType(),
+				creationDTO.getEmail(),
+				creationDTO.getDob(),
+				creationDTO.getBirthOrder(),
+				creationDTO.getParity(),
+				creationDTO.getGravida(),
+				creationDTO.getIdentityUnknownIndicator(),
+				creationDTO.getCauseOfDeathKnownIndicator(),
+				creationDTO.getPatientAddressType(),
+				creationDTO.getPatientAddress(),
+				creationDTO.getPatientLandlineNumber(),
+        		creationDTO.getPatientMobileNumber(),
+        		creationDTO.getPatientClass(),
+        		creationDTO.getPregnancyIndicator(),
+        		creationDTO.getDurationOfPregnancy(),
+        		creationDTO.getInsuredCardID(),
+        		creationDTO.getInsuredPolicyID(),
+        		creationDTO.getSecondaryHealthInsurancePolicyID(),
+        		creationDTO.getSecondaryHealthInsurancePolicyIndicator()
 
 		));
 	}

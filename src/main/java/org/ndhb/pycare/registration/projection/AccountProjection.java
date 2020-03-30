@@ -31,17 +31,33 @@ public class AccountProjection {
 
     @EventHandler
     public void on(AccountCreatedEvent event) {
-        log.debug("Handling an Account creation command {}", event.getId());
+        log.debug("Handling an Account creation command {}", event.getAccountId());
         Account account = new Account(
-                event.getId(),
-                event.getPatientLocalId(),
-                event.getUhid(),
-                event.getName(),
-                event.getEmail(),
-                event.getDob(),
-                event.getAge(),
-                event.getStatus(),
-                event.getRegistrationType()
+        		event.getAccountId(),
+        		event.getPatientLocalId(),
+        		event.getUhid(),
+        		event.getPatientName(),
+        		event.getDob(),
+               // command.getPatientAge(),
+        		event.getStatus(),
+        		event.getRegistrationType(),
+        		event.getEmail(),
+        		event.getBirthOrder(),
+        		event.getParity(),
+        		event.getGravida(),
+        		event.getIdentityUnknownIndicator(),
+        		event.getCauseOfDeathKnownIndicator(),
+        		event.getPatientAddressType(),
+        		event.getPatientAddress(),
+        		event.getPatientLandlineNumber(),
+        		event.getPatientMobileNumber(),
+        		event.getPatientClass(),
+        		event.getPregnancyIndicator(),
+        		event.getDurationOfPregnancy(),
+        		event.getInsuredCardID(),
+        		event.getInsuredPolicyID(),
+        		event.getSecondaryHealthInsurancePolicyIndicator(),
+        		event.getSecondaryHealthInsurancePolicyID()
 
                
 
@@ -53,23 +69,39 @@ public class AccountProjection {
     
     @EventHandler
     public void on(AccountUpdatedEvent event) throws AccountNotFoundException {
-        log.debug("Handling an Account update command {}", event.getId());
-        Optional<Account> optionalAccount = this.repository.findById(event.getId());
+        log.debug("Handling an Account update command {}", event.getAccountId());
+        Optional<Account> optionalAccount = this.repository.findById(event.getAccountId());
         if (optionalAccount.isPresent()) {
             Account account = optionalAccount.get();
-            account.setName(event.getName());
-            account.setAge(event.getAge());
+            account.setPatientName(event.getPatientName());
             account.setRegistrationType(event.getRegistrationType());
             account.setDob(event.getDob());
             account.setUhid(event.getUhid());
-            account.setId(event.getId());
+            account.setId(event.getAccountId());
+            account.setPatientClass(event.getPatientClass());
+            account.setCauseOfDeathKnownIndicator(event.getCauseOfDeathKnownIndicator());
+            account.setBirthOrder(event.getBirthOrder());
+            account.setDurationOfPregnancy(event.getDurationOfPregnancy());
+            account.setPatientAddress(event.getPatientAddress());
+            account.setPatientAddressType(event.getPatientAddressType());
+            account.setPatientLandlineNumber(event.getPatientLandlineNumber());
+            account.setPatientMobileNumber(event.getPatientMobileNumber());
+            account.setPregnancyIndicator(event.getPregnancyIndicator());
+            account.setInsuredPolicyID(event.getInsuredCardID());
+            account.setParity(event.getParity());
+            account.setGravida(event.getGravida());
+            account.setEmail(event.getEmail());
+            account.setBirthOrder(event.getBirthOrder());
+            account.setInsuredCardID(event.getInsuredCardID());
+            account.setSecondaryHealthInsurancePolicyID(event.getSecondaryHealthInsurancePolicyID());
+            account.setSecondaryHealthInsurancePolicyIndicator(event.getSecondaryHealthInsurancePolicyIndicator());
 
 
 
   
         this.repository.save(account);
         } else {
-            throw new AccountNotFoundException(event.getId());
+            throw new AccountNotFoundException(event.getAccountId());
         }
     }
     

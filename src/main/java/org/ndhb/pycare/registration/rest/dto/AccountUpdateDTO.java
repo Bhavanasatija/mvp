@@ -8,10 +8,10 @@ import org.ndhb.pycare.registration.aggregate.StatusType;
 @Value
 public class AccountUpdateDTO {
     private String uhid;
-    private String name;
+    private String patientName;
     private String email;
     private String dob;
-    private int age;
+    private int patientAge;
     private StatusType status;
     private RegistrationType registrationType;
 
